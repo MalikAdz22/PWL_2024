@@ -6,7 +6,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
-use App\Http\Controllers\PhotoController; 
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SaleController; 
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -90,3 +95,20 @@ Route::get('/greeting', function () {
 Route::get('/greeting', [WelcomeController::class,  'greeting']);
     
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+
+// soal jobsheet2
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('category')->group(function () {
+    Route::get('/food-beverage', [ProductController::class, 'foodBeverage'])->name('products.foodBeverage');
+    Route::get('/beauty-health', [ProductController::class, 'beautyHealth'])->name('products.beautyHealth');
+    Route::get('/home-care', [ProductController::class, 'homeCare'])->name('products.homeCare');
+    Route::get('/baby-kid', [ProductController::class, 'babyKid'])->name('products.babyKid');
+});
+
+
+Route::get('/user/{id}/name/{name}', [UserController::class, 'show']);
+Route::get('/sale', [SaleController::class, 'index'])->name('sales.index');
